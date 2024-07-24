@@ -5,19 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code Generator</title>
 </head>
-<body>
-    <div class="container">
-
-        <p>Enter Your Text or URL</p>
-        <input type="text" placeholder="Text Or URL" id="qrtext">
-
-        <div class="Qrbox">
-            <img src="" id="qrImg">
-        </div>
-
-        <button onclick="GenerateQR()">Generate QR Code</button>
-    </div>
-<style>
+    <style>
    
 
 body {
@@ -82,6 +70,19 @@ body {
 
 
 </style>
+<body>
+    <div class="container">
+
+        <p>Enter Your Text or URL</p>
+        <input type="text" placeholder="Text Or URL" id="qrtext">
+
+        <div class="Qrbox">
+            <img src="" id="qrImg">
+        </div>
+
+        <button onclick="GenerateQR()">Generate QR Code</button>
+    </div>
+
     <script>
 
         let img = document.getElementsByClassName('Qrbox')
