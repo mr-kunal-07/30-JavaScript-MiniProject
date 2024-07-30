@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Passwoed Generotor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="con">
+        <h1>Generotor a<br><span>Random Password</span></h1>
+        <div class="display">
+            <input type="text" id="Passwoed" placeholder="Passwoed">
+            <img onclick="copyPass()" src="images/copy.png">
+        </div>
+        <button onclick="creatPass()" > <img src="images/generate.png"> Generate Password </button>
+    </div>
+
+
+
+    <script>
+        
+        const PasswoedBox = document.getElementById('Passwoed')
+        const length = 12;
+
+        const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        const lowerCase = "abcdefghijklmnopqrstuvwxyz"
+        const number = "0123456789"
+        const symbols = "@#$%&*"
+
+        const allChars = upperCase + lowerCase + number + symbols
+
+
+        function creatPass(){
+            let Passwoed = "";
+            Passwoed += upperCase[Math.floor(Math.random() * upperCase.length)]
+            Passwoed += lowerCase[Math.floor(Math.random() * lowerCase.length)]
+            Passwoed += number[Math.floor(Math.random() * number.length)]
+            Passwoed += symbols[Math.floor(Math.random() * symbols.length)]
+
+            while (length > Passwoed.length) {
+                Passwoed += allChars[Math.floor(Math.random() * allChars.length)]
+                
+            }
+
+            PasswoedBox.value = Passwoed;
+        }
+
+
+
+        function copyPass(){
+            PasswoedBox.select()
+            document.execCommand('copy')
+        }
+
+    </script>
+
+</body>
+</html>
