@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="sw">
+        <h1 id="displaytime">00:00:00</h1>
+        <div class="button">
+            <i onclick="watchRestart()" class="fa-solid fa-reply"></i>
+            <i id="startBtn" onclick="toggleWatch()" class="fa-solid fa-play"></i>
+            <i onclick="saveLap()" class="fa-solid fa-flag"></i>
+        </div>
+        <ul id="laps"></ul>
+    </div>
+
+    <script>
+        let [seconds, minutes, hours] = [0, 0, 0];
+        let displaytime = document.getElementById("displaytime");
+        let laps = document.getElementById("laps");
+        let timer = null;
+        let isRunning = false;
+
+        function sw() {
+            seconds++;
+            if (seconds == 60) {
+                seconds = 0;
+                minutes++;
+                if (minutes == 60) {
+                    minutes = 0;
+                    hours++;
+                }
+            }
+
+            let h = hours < 10 ? "0" + hours : hours;
+            let m = minutes < 10 ? "0" + minutes : minutes;
+            let s = seconds < 10 ? "0" + seconds : seconds;
+
+            displaytime.innerHTML = h + ":" + m + ":" + s;
+        }
+
+        function toggleWatch() {
+            if (isRunning) {
+                clearInterval(timer);
+                document.getElementById("startBtn").classList.replace("fa-pause", "fa-play");
+            } else {
+                timer = setInterval(sw, 1000);
+                document.getElementById("startBtn").classList.replace("fa-play", "fa-pause");
+            }
+            isRunning = !isRunning;
+        }
+
+        function watchRestart() {
+            clearInterval(timer);
+            [seconds, minutes, hours] = [0, 0, 0];
+            displaytime.innerHTML = "00:00:00";
+            laps.innerHTML = "";
+            document.getElementById("startBtn").classList.replace("fa-pause", "fa-play");
+            isRunning = false;
+        }
+
+        function saveLap() {
+            let lapTime = displaytime.innerHTML;
+            let lapElement = document.createElement("li");
+            lapElement.innerText = lapTime;
+            laps.appendChild(lapElement);
+        }
+    </script>
+
+</body>
+
+</html>
